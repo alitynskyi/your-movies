@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Button } from "@mui/material";
+import PageBase from "./components/PageBase";
 
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { fetchPopularMovie } from "./store/movies/movieActions";
@@ -14,9 +14,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Button>asdqwe</Button>
-    </div>
+    <PageBase>
+      <div>qwe</div>
+    </PageBase>
   );
 }
 
