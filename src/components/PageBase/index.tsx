@@ -1,5 +1,6 @@
 import React from "react";
 
+import Box from "@mui/material/Box";
 import Header from "../Header";
 import Footer from "../Footer";
 
@@ -12,7 +13,7 @@ const PageBase: React.FC<PageBaseProps> = ({ children }) => {
     <>
       <Header />
 
-      {children}
+      <Box pt={10}>{children}</Box>
 
       <Footer />
     </>

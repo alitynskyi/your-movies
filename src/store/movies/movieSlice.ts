@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IMovie } from "../../types/IMovie";
-import { fetchPopularMovie } from "./movieActions";
+import { IMovie } from "../../types";
+import { fetchPopularMovie } from "./movieOperations";
 
 interface MovieState {
   movies: IMovie[];
+  page: number;
   isLoading: boolean;
   error: string;
 }
 
 const initialState: MovieState = {
   movies: [],
+  page: 1,
   isLoading: false,
   error: "",
 };
@@ -28,7 +30,7 @@ export const movieSlice = createSlice({
     ) => {
       state.isLoading = false;
       state.error = "";
-      state.movies = action.payload;
+      state.movies = [...state.movies, ...action.payload];
     },
     [fetchPopularMovie.rejected.type]: (
       state,

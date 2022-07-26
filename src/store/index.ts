@@ -1,12 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import movieReducer from "./movies/movieSlice";
+import { movieAPI } from "../services/movieService";
+// import movieReducer from "./movies/movieSlice";
 
 const rootReducer = combineReducers({
-  movieReducer,
+  [movieAPI.reducerPath]: movieAPI.reducer,
 });
 
 export const setupStore = () => {
-  return configureStore({ reducer: rootReducer });
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddlewere) =>
+      getDefaultMiddlewere().concat(movieAPI.middleware),
+  });
 };
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,22 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import PageBase from "./components/PageBase";
-
-import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import { fetchPopularMovie } from "./store/movies/movieActions";
+import HomePage from "./components/HomePage";
 
 function App() {
-  const { movies, error } = useAppSelector((state) => state.movieReducer);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPopularMovie());
-  }, [dispatch]);
-
   return (
-    <PageBase>
-      <div>qwe</div>
-    </PageBase>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/movies" element={<>MoviesPage</>} />
+      <Route path="/series" element={<>SeriesPage</>} />
+      <Route path="*" element={<p>404</p>} />
+    </Routes>
   );
 }
 

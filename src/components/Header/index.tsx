@@ -1,36 +1,87 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Logo from "../Logo";
 
 import useStyles from "./useStyles";
 
 const Header = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null,
+  );
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          <Box mr={12} display={{ xs: "none", md: "flex" }}>
+            <RouterLink to="/" className={classes.routerLink}>
+              <Logo size="large" />
+            </RouterLink>
+          </Box>
 
-          <Typography variant="h6" noWrap flexGrow={1} ml={2}>
-            KinoTyt
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorElNav}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              <MenuItem component={RouterLink} to="/movies">
+                Movies
+              </MenuItem>
+
+              <MenuItem component={RouterLink} to="/series">
+                Series
+              </MenuItem>
+            </Menu>
+          </Box>
+
+          <Box flexGrow={1} display={{ xs: "flex", md: "none" }}>
+            <RouterLink to="/" className={classes.routerLink}>
+              <Logo size="large" />
+            </RouterLink>
+          </Box>
+
+          <Box flexGrow={1} display={{ xs: "none", md: "flex" }}>
+            <MenuItem component={RouterLink} to="/movies" sx={{ mr: 4 }}>
+              <Typography variant="h6">Movies</Typography>
+            </MenuItem>
+
+            <MenuItem component={RouterLink} to="/series">
+              <Typography variant="h6">Series</Typography>
+            </MenuItem>
+          </Box>
 
           <Box className={classes.inputWrapper}>
             <Box
@@ -46,7 +97,6 @@ const Header = () => {
             <InputBase
               classes={{ input: classes.input }}
               placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
             />
           </Box>
         </Toolbar>
