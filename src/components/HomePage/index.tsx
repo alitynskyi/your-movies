@@ -1,48 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 
 import PageBase from "../PageBase";
-// import Hero from "../Hero";
 import MoviesList from "../MovieList";
+import Loader from "../Loader";
 
-import { movieAPI } from "../../services/movieService";
+import { useGetTrendsQuery } from "../../services/movieService";
 
 const HomePage = () => {
-  const [pageCurrent, setCurrentPage] = useState(1);
-
-  const { data: trendsMovies } = movieAPI.useFetchTrendsQuery(pageCurrent);
-
-  console.log(trendsMovies?.results);
+  const { data: trendsMoviesData } = useGetTrendsQuery({ type: "all" });
 
   return (
     <PageBase>
       <Box pt={10} pb={5}>
-        {/* {trendsMovies && <Hero movie={trendsMovies.results[0]} />} */}
-
         <Container maxWidth="xl">
           <Typography variant="h4" mb={6}>
             Trending this week
           </Typography>
 
-          {trendsMovies ? (
-            <MoviesList
-              movies={trendsMovies.results}
-              totalPages={trendsMovies.total_pages}
-              changePage={setCurrentPage}
-            />
+          {trendsMoviesData ? (
+            <MoviesList movies={trendsMoviesData.results} withPagination />
           ) : (
-            <Box
-              height="80vh"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <CircularProgress size={100} />
-            </Box>
+            <Loader height="80vh" />
           )}
         </Container>
       </Box>

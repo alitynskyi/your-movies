@@ -57,8 +57,8 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem component={RouterLink} to="/movies">
-                Movies
+              <MenuItem component={RouterLink} to="/films">
+                Films
               </MenuItem>
 
               <MenuItem component={RouterLink} to="/series">
@@ -74,8 +74,8 @@ const Header = () => {
           </Box>
 
           <Box flexGrow={1} display={{ xs: "none", md: "flex" }}>
-            <MenuItem component={RouterLink} to="/movies" sx={{ mr: 4 }}>
-              <Typography variant="h6">Movies</Typography>
+            <MenuItem component={RouterLink} to="/films" sx={{ mr: 4 }}>
+              <Typography variant="h6">Films</Typography>
             </MenuItem>
 
             <MenuItem component={RouterLink} to="/series">

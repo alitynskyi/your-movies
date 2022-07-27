@@ -29,9 +29,9 @@ const Footer = () => {
           </Box>
 
           <Box display={{ xs: "none", md: "flex" }}>
-            <MenuItem component={RouterLink} to="/movies" sx={{ mr: 4 }}>
+            <MenuItem component={RouterLink} to="/films" sx={{ mr: 4 }}>
               <Typography variant="h6" color="common.white">
-                Movies
+                Films
               </Typography>
             </MenuItem>
 

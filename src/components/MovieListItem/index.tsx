@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -21,14 +22,21 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({ movie }) => {
   const type = formatedMediaType(movie.media_type);
   const releaseDate = formatedReleaseDate(movie);
   const [url, alt] = formatedPosterImage(movie);
-  const average = movie.vote_average ? movie.vote_average.toFixed(1) : null;
+  const rating = movie.vote_average ? movie.vote_average.toFixed(1) : null;
+  const linkToDetails =
+    movie.media_type === "movie" ? `/films/${movie.id}` : `/series/${movie.id}`;
 
   return (
-    <Box position="relative">
-      <Card elevation={0} onClick={() => console.log(movie.id)}>
-        {average && (
+    <Box
+      position="relative"
+      component={RouterLink}
+      to={linkToDetails}
+      sx={{ textDecoration: "none" }}
+    >
+      <Card elevation={0}>
+        {rating && (
           <Box position="absolute" top={10} left={10} zIndex={1}>
-            <Chip label={average} color="primary" />
+            <Chip label={rating} color="primary" />
           </Box>
         )}
 

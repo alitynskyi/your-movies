@@ -13,7 +13,7 @@ const PageBase: React.FC<PageBaseProps> = ({ children }) => {
     <>
       <Header />
 
-      <Box pt={10}>{children}</Box>
+      <Box pt={13}>{children}</Box>
 
       <Footer />
     </>
