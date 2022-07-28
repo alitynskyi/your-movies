@@ -10,13 +10,15 @@ interface PageBaseProps {
 
 const PageBase: React.FC<PageBaseProps> = ({ children }) => {
   return (
-    <>
+    <Box display="flex" flexDirection="column" minHeight="100vh">
       <Header />
 
-      <Box pt={13}>{children}</Box>
+      <Box pt={13} flexGrow={1}>
+        {children}
+      </Box>
 
       <Footer />
-    </>
+    </Box>
   );
 };
 export default PageBase;

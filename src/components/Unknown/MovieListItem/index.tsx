@@ -9,10 +9,10 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import Chip from "@mui/material/Chip";
 
-import formatedPosterImage from "../../common/formatedPosterImage";
-import formatedMediaType from "../../common/formatedMediaType";
-import formatedReleaseDate from "../../common/formatedReleaseDate";
-import { IMovie } from "../../types";
+import formatedPosterImage from "../../../common/formatedPosterImage";
+import formatedMediaType from "../../../common/formatedMediaType";
+import formatedReleaseDate from "../../../common/formatedReleaseDate";
+import { IMovie } from "../../../types";
 
 interface MoviesListItemProps {
   movie: IMovie;
@@ -49,7 +49,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({ movie }) => {
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              {releaseDate}, {type}
+              {releaseDate ? `${releaseDate},` : null} {type}
             </Typography>
           </CardContent>
         </CardActionArea>

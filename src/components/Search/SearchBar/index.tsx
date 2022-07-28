@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDebounce, useOnClickOutside } from "usehooks-ts";
+import { Link as RouterLink } from "react-router-dom";
 
 import Input from "@mui/material/Input";
 import FormControl from "@mui/material/FormControl";
@@ -7,13 +8,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { IconButton } from "@mui/material";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchBarList from "../SearchBarList";
 
-import { useLazyGetFilmsQuery } from "../../services/movieService";
-import theme from "../../common/theme";
+import { useLazyGetMoviesByTypeQuery } from "../../../services/movieService";
+import theme from "../../../common/theme";
+import useStyles from "./useStyles";
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState("");
@@ -22,11 +25,12 @@ const SearchBar = () => {
   const query = useDebounce(inputValue);
 
   const inputRef = useRef(null);
+  const classes = useStyles();
 
   const showSearchList = isFocused && query;
   const type = tabValue === 0 ? "movie" : "tv";
 
-  const [trigger, { data: moviesData }] = useLazyGetFilmsQuery();
+  const [trigger, { data: moviesData }] = useLazyGetMoviesByTypeQuery();
 
   const handleChangeTabValue = (
     event: React.SyntheticEvent,
@@ -100,6 +104,19 @@ const SearchBar = () => {
 
             <Box>
               <SearchBarList movies={moviesData?.results} mediaType={type} />
+
+              {moviesData?.results.length !== 0 && (
+                <Box className={classes.watchAllBtn}>
+                  <Button
+                    component={RouterLink}
+                    to={`/search/${query}`}
+                    fullWidth
+                    color="inherit"
+                  >
+                    Watch all
+                  </Button>
+                </Box>
+              )}
             </Box>
           </Box>
         )}

@@ -5,9 +5,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import StarIcon from "@mui/icons-material/Star";
 
-import formatedPosterImage from "../../common/formatedPosterImage";
-import formatedReleaseDate from "../../common/formatedReleaseDate";
-import { IMovie } from "../../types";
+import formatedPosterImage from "../../../common/formatedPosterImage";
+import formatedReleaseDate from "../../../common/formatedReleaseDate";
+import { IMovie } from "../../../types";
 import useStyles from "./useStyles";
 
 interface SearchBarCardProps {

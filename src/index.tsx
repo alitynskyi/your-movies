@@ -6,7 +6,7 @@ import { CssBaseline, StyledEngineProvider } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 import App from "./App";
-import GlobalStyles from "./components/GlobalStyles";
+import GlobalStyles from "./components/Unknown/GlobalStyles";
 import { setupStore } from "./store";
 import theme from "./common/theme";
 

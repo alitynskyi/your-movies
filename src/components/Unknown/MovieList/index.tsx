@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import MoviesListItem from "../MovieListItem";
 import Pagination from "../Pagination";
 
-import { IMovie } from "../../types";
+import { IMovie } from "../../../types";
 
 interface MoviesListProps {
   movies: IMovie[];
@@ -20,7 +20,8 @@ const MoviesList: React.FC<MoviesListProps> = ({
   totalPages,
   changePage,
 }) => {
-  const showPagination = withPagination && totalPages && changePage;
+  const showPagination =
+    withPagination && !!totalPages && totalPages !== 0 && !!changePage;
 
   return (
     <Box>

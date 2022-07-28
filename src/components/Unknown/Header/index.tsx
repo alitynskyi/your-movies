@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Logo";
-import SearchBar from "../SearchBar";
+import SearchBar from "../../Search/SearchBar";
 
 import useStyles from "./useStyles";
 
