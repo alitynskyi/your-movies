@@ -19,9 +19,12 @@ export const movieAPI = createApi({
         },
       }),
     }),
-    getFilms: build.query<IMoviesData, { query: string; page?: number }>({
-      query: ({ query, page = 1 }) => ({
-        url: "/search/movie",
+    getFilms: build.query<
+      IMoviesData,
+      { query: string; type: "movie" | "tv"; page?: number }
+    >({
+      query: ({ query, type, page = 1 }) => ({
+        url: `search/${type}`,
         params: {
           api_key: API_KEY,
           query,
@@ -40,7 +43,11 @@ export const movieAPI = createApi({
   }),
 });
 
-export const { useGetTrendsQuery, useGetFilmsQuery, useGetMovieByIdQuery } =
-  movieAPI;
+export const {
+  useGetTrendsQuery,
+  useGetFilmsQuery,
+  useLazyGetFilmsQuery,
+  useGetMovieByIdQuery,
+} = movieAPI;
 
 export const { getFilms, getMovieById, getTrends } = movieAPI.endpoints;

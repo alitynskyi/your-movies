@@ -6,6 +6,7 @@ import { CssBaseline, StyledEngineProvider } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 import App from "./App";
+import GlobalStyles from "./components/GlobalStyles";
 import { setupStore } from "./store";
 import theme from "./common/theme";
 
@@ -20,6 +21,7 @@ root.render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <StyledEngineProvider injectFirst>
+            <GlobalStyles />
             <CssBaseline />
             <App />
           </StyledEngineProvider>

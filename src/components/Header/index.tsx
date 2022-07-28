@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, MouseEvent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -6,22 +6,19 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Logo";
+import SearchBar from "../SearchBar";
 
 import useStyles from "./useStyles";
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -83,22 +80,7 @@ const Header = () => {
             </MenuItem>
           </Box>
 
-          <Box className={classes.inputWrapper}>
-            <Box
-              display="flex"
-              alignItems="center"
-              position="absolute"
-              height="100%"
-              pl={2}
-            >
-              <SearchIcon />
-            </Box>
-
-            <InputBase
-              classes={{ input: classes.input }}
-              placeholder="Search…"
-            />
-          </Box>
+          <SearchBar />
         </Toolbar>
       </Container>
     </AppBar>

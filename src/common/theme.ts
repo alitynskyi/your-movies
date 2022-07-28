@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, alpha } from "@mui/material";
 
 const breakpoints = {
   values: { xs: 0, sm: 420, md: 760, lg: 1024, xl: 1400 },
@@ -6,6 +6,8 @@ const breakpoints = {
 
 const colors = {
   primary: "#5c8f22",
+  primaryLight: "#74a043",
+  secondary: "#ffffff",
 };
 
 const defaultTheme = createTheme({
@@ -17,7 +19,8 @@ const theme = createTheme({
   spacing: 5,
   breakpoints,
   palette: {
-    primary: { main: colors.primary },
+    primary: { main: colors.primary, light: colors.primaryLight },
+    secondary: { main: colors.secondary },
   },
   typography: {
     h4: {
@@ -60,6 +63,41 @@ const theme = createTheme({
           [defaultTheme.breakpoints.up("md")]: {
             borderRadius: 8,
           },
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          borderRadius: defaultTheme.shape.borderRadius,
+          backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),
+          "&:hover": {
+            backgroundColor: alpha(defaultTheme.palette.common.white, 0.25),
+          },
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          color: defaultTheme.palette.common.white,
+          "&:hover:not(.Mui-disabled):before": {
+            border: "none",
+          },
+          "&::before": {
+            border: "none",
+          },
+          "&::after": {
+            border: "none",
+          },
+        },
+      },
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        positionStart: {
+          paddingLeft: defaultTheme.spacing(1),
+          color: defaultTheme.palette.common.white,
         },
       },
     },
