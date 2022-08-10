@@ -12,7 +12,7 @@ const GlobalStyles: React.FC = () => {
           width: 8,
         },
         "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.primary.main,
           backgroundClip: "content-box",
           border: "2px solid transparent",
           borderRadius: 16,

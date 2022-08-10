@@ -1,5 +1,6 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useRef } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useOnClickOutside } from "usehooks-ts";
 
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -10,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
 import Logo from "../Logo";
 import SearchBar from "../../Search/SearchBar";
 
@@ -17,6 +19,9 @@ import useStyles from "./useStyles";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [openSearchBar, setOpenSearchBar] = useState(false);
+  const searchBarRef = useRef(null);
+  const classes = useStyles();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -26,7 +31,7 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const classes = useStyles();
+  useOnClickOutside(searchBarRef, () => setOpenSearchBar(false));
 
   return (
     <AppBar position="fixed">
@@ -38,7 +43,7 @@ const Header = () => {
             </RouterLink>
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 5 }}>
             <IconButton
               size="large"
               onClick={handleOpenNavMenu}
@@ -48,23 +53,31 @@ const Header = () => {
             </IconButton>
             <Menu
               anchorEl={anchorElNav}
-              open={Boolean(anchorElNav)}
+              open={!!anchorElNav}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem component={RouterLink} to="/films">
+              <MenuItem
+                component={RouterLink}
+                to="/films"
+                onClick={handleCloseNavMenu}
+              >
                 Films
               </MenuItem>
 
-              <MenuItem component={RouterLink} to="/series">
+              <MenuItem
+                component={RouterLink}
+                to="/series"
+                onClick={handleCloseNavMenu}
+              >
                 Series
               </MenuItem>
             </Menu>
           </Box>
 
-          <Box flexGrow={1} display={{ xs: "flex", md: "none" }}>
+          <Box flexGrow={1} display={{ xs: "flex", md: "none" }} mr={5}>
             <RouterLink to="/" className={classes.routerLink}>
               <Logo size="large" />
             </RouterLink>
@@ -80,7 +93,32 @@ const Header = () => {
             </MenuItem>
           </Box>
 
-          <SearchBar />
+          <Box
+            position="absolute"
+            right={0}
+            display={{ xs: "none", sm: "block" }}
+            bgcolor="primary.main"
+          >
+            <SearchBar />
+          </Box>
+
+          <Box display={{ sm: "none" }}>
+            <IconButton onClick={() => setOpenSearchBar(true)} color="inherit">
+              <SearchIcon />
+            </IconButton>
+
+            {openSearchBar && (
+              <Box
+                position="absolute"
+                right={0}
+                top={7}
+                bgcolor="primary.main"
+                ref={searchBarRef}
+              >
+                <SearchBar />
+              </Box>
+            )}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

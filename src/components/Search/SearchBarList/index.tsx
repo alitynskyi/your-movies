@@ -10,9 +10,14 @@ import useStyles from "./useStyles";
 interface SearchBarListProps {
   movies?: IMovie[];
   mediaType: "movie" | "tv";
+  onItemClick: () => void;
 }
 
-const SearchBarList: React.FC<SearchBarListProps> = ({ movies, mediaType }) => {
+const SearchBarList: React.FC<SearchBarListProps> = ({
+  movies,
+  mediaType,
+  onItemClick,
+}) => {
   const classes = useStyles();
 
   if (!movies || movies.length === 0)
@@ -27,7 +32,12 @@ const SearchBarList: React.FC<SearchBarListProps> = ({ movies, mediaType }) => {
   return (
     <Box className={classes.searchListWrapper}>
       {movies.map((movie) => (
-        <SearchBarCard key={movie.id} movie={movie} mediaType={mediaType} />
+        <SearchBarCard
+          key={movie.id}
+          movie={movie}
+          mediaType={mediaType}
+          onClick={onItemClick}
+        />
       ))}
     </Box>
   );

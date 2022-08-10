@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -13,11 +13,16 @@ import useStyles from "./useStyles";
 interface SearchBarCardProps {
   movie: IMovie;
   mediaType: "movie" | "tv";
+  onClick: () => void;
 }
 
-const SearchBarCard: React.FC<SearchBarCardProps> = ({ movie, mediaType }) => {
+const SearchBarCard: React.FC<SearchBarCardProps> = ({
+  movie,
+  mediaType,
+  onClick,
+}) => {
+  const location = useLocation();
   const releaseDate = formatedReleaseDate(movie);
-  const [url, alt] = formatedPosterImage(movie);
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "0";
   const linkToDetails =
     mediaType === "movie" ? `/films/${movie.id}` : `/series/${movie.id}`;
@@ -25,9 +30,21 @@ const SearchBarCard: React.FC<SearchBarCardProps> = ({ movie, mediaType }) => {
   const classes = useStyles();
 
   return (
-    <Box component={RouterLink} to={linkToDetails} className={classes.card}>
+    <Box
+      component={RouterLink}
+      to={linkToDetails}
+      state={{
+        from: location.pathname,
+      }}
+      className={classes.card}
+      onClick={onClick}
+    >
       <Box mr={4} display="flex">
-        <img src={url} alt={alt} width={50} />
+        <img
+          src={formatedPosterImage(movie.poster_path)}
+          alt={movie.title ?? movie.name}
+          width={50}
+        />
       </Box>
 
       <Box pt={1} flexGrow={1}>
@@ -44,7 +61,7 @@ const SearchBarCard: React.FC<SearchBarCardProps> = ({ movie, mediaType }) => {
           <Typography variant="body1" color="common.white">
             {rating}
           </Typography>
-          <StarIcon sx={{ fontSize: 14, color: "yellow" }} />
+          <StarIcon sx={{ fontSize: 14, color: "#ffd700e6" }} />
         </Box>
       )}
     </Box>

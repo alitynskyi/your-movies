@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-
-import PageBase from "../../Unknown/PageBase";
 import MoviesList from "../../Unknown/MovieList";
 import Loader from "../../Unknown/Loader";
 
@@ -15,40 +12,33 @@ const SearchPage = () => {
   const [page, setPage] = useState(1);
   const { query } = useParams();
 
-  const { data: moviesData } = useGetMoviesByTypeQuery({
+  const { data: moviesData, isLoading } = useGetMoviesByTypeQuery({
     query: query ?? "",
     type: "movie",
     page,
   });
 
   return (
-    <PageBase>
-      <Box pt={10} pb={5}>
-        <Container maxWidth="xl">
-          <Typography variant="h5" mb={6}>
-            Search results for:{" "}
-            <span style={{ fontStyle: "italic" }}>{query}</span>
-          </Typography>
+    <Box pt={18} pb={5} height="100%" display="flex" flexDirection="column">
+      <Typography variant="h5" mb={6}>
+        Search results for: <span style={{ fontStyle: "italic" }}>{query}</span>
+      </Typography>
 
-          {moviesData ? (
-            <MoviesList
-              movies={moviesData.results}
-              withPagination
-              totalPages={moviesData.total_pages}
-              changePage={setPage}
-            />
-          ) : (
-            <Loader height="80vh" />
-          )}
+      {isLoading && <Loader />}
 
-          {moviesData?.results.length === 0 && (
-            <Box mt={5}>
-              <Typography>No results for your query</Typography>
-            </Box>
-          )}
-        </Container>
-      </Box>
-    </PageBase>
+      {moviesData?.results.length ? (
+        <MoviesList
+          movies={moviesData.results}
+          withPagination
+          totalPages={moviesData.total_pages}
+          changePage={setPage}
+        />
+      ) : (
+        <Box mt={5}>
+          <Typography>No results for your query</Typography>
+        </Box>
+      )}
+    </Box>
   );
 };
 export default SearchPage;

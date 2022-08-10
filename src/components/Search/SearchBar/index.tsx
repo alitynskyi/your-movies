@@ -53,7 +53,8 @@ const SearchBar = () => {
 
   return (
     <Box
-      width={isFocused ? 360 : 200}
+      width={isFocused ? 320 : 200}
+      maxWidth="100%"
       sx={{ transition: theme.transitions.create("width") }}
     >
       <FormControl fullWidth ref={inputRef}>
@@ -103,7 +104,11 @@ const SearchBar = () => {
             </Box>
 
             <Box>
-              <SearchBarList movies={moviesData?.results} mediaType={type} />
+              <SearchBarList
+                movies={moviesData?.results}
+                mediaType={type}
+                onItemClick={() => setIsFocused(false)}
+              />
 
               {moviesData?.results.length !== 0 && (
                 <Box className={classes.watchAllBtn}>
@@ -112,6 +117,7 @@ const SearchBar = () => {
                     to={`/search/${query}`}
                     fullWidth
                     color="inherit"
+                    onClick={() => setIsFocused(false)}
                   >
                     Watch all
                   </Button>

@@ -8,6 +8,9 @@ export default makeStyles<Theme>((theme) => ({
     paddingBottom: theme.spacing(2),
     maxHeight: 500,
     overflowY: "scroll",
+    "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   watchAllBtn: {
     borderBottomLeftRadius: "4px",

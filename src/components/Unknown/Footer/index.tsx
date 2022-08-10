@@ -42,20 +42,27 @@ const Footer = () => {
             </MenuItem>
           </Box>
 
-          <Typography variant="body2" color="common.white">
-            <Link
+          <Box>
+            <Typography
+              component={Link}
               href="https://developers.themoviedb.org/3"
               target="_blank"
-              color="inherit"
-              underline="none"
-              borderRight="1px solid"
-              pr={2}
-              mr={2}
+              variant="body2"
+              color="common.white"
             >
               Database API
-            </Link>
-            © 2022 YourMovies
-          </Typography>
+            </Typography>
+            <Typography
+              variant="body2"
+              color="common.white"
+              display="inline-block"
+              borderLeft="1px solid"
+              pl={2}
+              ml={2}
+            >
+              © 2022 YourMovies
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </Box>

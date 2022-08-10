@@ -5,4 +5,9 @@ export default makeStyles<Theme>(() => ({
   routerLink: {
     textDecoration: "none",
   },
+  apiLink: {
+    "&:hover": {
+      color: "red",
+    },
+  },
 }));

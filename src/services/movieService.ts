@@ -1,7 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { API_KEY, BASE_URS } from "../common/constants";
-import { IMoviesData } from "../types";
+import {
+  IMovie,
+  IMoviesData,
+  IMovieCastData,
+  IMovieReviewsData,
+} from "../types";
 
 export const movieAPI = createApi({
   reducerPath: "movieAPI",
@@ -19,16 +24,6 @@ export const movieAPI = createApi({
         },
       }),
     }),
-    getAllMovies: build.query<IMoviesData, { query: string; page?: number }>({
-      query: ({ query, page = 1 }) => ({
-        url: "search/multi",
-        params: {
-          api_key: API_KEY,
-          query,
-          page,
-        },
-      }),
-    }),
     getMoviesByType: build.query<
       IMoviesData,
       { query: string; type: "movie" | "tv"; page?: number }
@@ -42,9 +37,40 @@ export const movieAPI = createApi({
         },
       }),
     }),
-    getMovieById: build.query<IMoviesData, string>({
+    getMovieCast: build.query<
+      IMovieCastData,
+      { movieId: string; type: "movie" | "tv" }
+    >({
+      query: ({ movieId, type }) => ({
+        url: `${type}/${movieId}/credits`,
+        params: {
+          api_key: API_KEY,
+        },
+      }),
+    }),
+    getMovieReviews: build.query<
+      IMovieReviewsData,
+      { movieId: string; type: "movie" | "tv"; page?: number }
+    >({
+      query: ({ movieId, type, page = 1 }) => ({
+        url: `${type}/${movieId}/reviews`,
+        params: {
+          api_key: API_KEY,
+          page,
+        },
+      }),
+    }),
+    getFilmById: build.query<IMovie, string>({
       query: (id) => ({
         url: `/movie/${id}`,
+        params: {
+          api_key: API_KEY,
+        },
+      }),
+    }),
+    getSeriesById: build.query<IMovie, string>({
+      query: (id) => ({
+        url: `/tv/${id}`,
         params: {
           api_key: API_KEY,
         },
@@ -55,8 +81,10 @@ export const movieAPI = createApi({
 
 export const {
   useGetTrendsQuery,
-  useGetAllMoviesQuery,
   useGetMoviesByTypeQuery,
   useLazyGetMoviesByTypeQuery,
-  useGetMovieByIdQuery,
+  useGetMovieCastQuery,
+  useGetMovieReviewsQuery,
+  useGetFilmByIdQuery,
+  useGetSeriesByIdQuery,
 } = movieAPI;

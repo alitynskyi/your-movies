@@ -1,7 +1,7 @@
 import { createTheme, alpha } from "@mui/material";
 
 const breakpoints = {
-  values: { xs: 0, sm: 420, md: 760, lg: 1024, xl: 1400 },
+  values: { xs: 360, sm: 480, md: 760, lg: 1024, xl: 1200 },
 };
 
 const colors = {
@@ -41,7 +41,7 @@ const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          [defaultTheme.breakpoints.up("sm")]: {
+          [defaultTheme.breakpoints.up("xs")]: {
             paddingRight: defaultTheme.spacing(5),
             paddingLeft: defaultTheme.spacing(5),
           },
@@ -51,7 +51,7 @@ const theme = createTheme({
     MuiToolbar: {
       styleOverrides: {
         root: {
-          [defaultTheme.breakpoints.up("sm")]: {
+          [defaultTheme.breakpoints.up("xs")]: {
             padding: 0,
           },
         },

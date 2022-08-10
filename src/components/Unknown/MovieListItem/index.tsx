@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -19,18 +19,21 @@ interface MoviesListItemProps {
 }
 
 const MoviesListItem: React.FC<MoviesListItemProps> = ({ movie }) => {
+  const location = useLocation();
   const type = formatedMediaType(movie.media_type);
   const releaseDate = formatedReleaseDate(movie);
-  const [url, alt] = formatedPosterImage(movie);
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : null;
   const linkToDetails =
-    movie.media_type === "movie" ? `/films/${movie.id}` : `/series/${movie.id}`;
+    movie.media_type === "tv" ? `/series/${movie.id}` : `/films/${movie.id}`;
 
   return (
     <Box
       position="relative"
       component={RouterLink}
       to={linkToDetails}
+      state={{
+        from: location.pathname,
+      }}
       sx={{ textDecoration: "none" }}
     >
       <Card elevation={0}>
@@ -41,7 +44,11 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({ movie }) => {
         )}
 
         <CardActionArea>
-          <CardMedia component="img" image={url} alt={alt} />
+          <CardMedia
+            component="img"
+            image={formatedPosterImage(movie.poster_path)}
+            alt={movie.title ?? movie.name}
+          />
 
           <CardContent>
             <Typography gutterBottom variant="h6">
