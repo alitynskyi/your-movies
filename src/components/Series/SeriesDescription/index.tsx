@@ -9,10 +9,10 @@ import Chip from "@mui/material/Chip";
 import StarIcon from "@mui/icons-material/Star";
 
 import formatedPosterImage from "../../../common/formatedPosterImage";
-import { IMovie } from "../../../types";
+import { Movie } from "../../../types";
 
 type SeriesDescriptionProps = {
-  series: IMovie;
+  series: Movie;
 };
 
 const SeriesDescription: React.FC<SeriesDescriptionProps> = ({ series }) => {

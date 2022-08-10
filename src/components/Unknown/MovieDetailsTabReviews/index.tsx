@@ -6,9 +6,10 @@ import ReviewCard from "../ReviewCard";
 import Loader from "../Loader";
 
 import { useGetMovieReviewsQuery } from "../../../services/movieService";
+import { MediaType } from "../../../types";
 
 interface MovieDetailsTabReviewsProps {
-  type: "movie" | "tv";
+  type: MediaType;
   movieId: string;
 }
 

@@ -12,9 +12,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Loader from "../Loader";
 
 import { useGetMovieCastQuery } from "../../../services/movieService";
+import { MediaType } from "../../../types";
 
 interface MovieDetailsTabCastProps {
-  type: "movie" | "tv";
+  type: MediaType;
   movieId: string;
 }
 
@@ -57,19 +58,23 @@ const MovieDetailsTabCast: React.FC<MovieDetailsTabCastProps> = ({
                 <PersonCard actor={actor} />
               </SwiperSlide>
             ))}
+
+            {data.cast.length > slidesPerView() && (
+              <>
+                <Box position="absolute" top="30%" left={0} zIndex={1}>
+                  <IconButton className="prev">
+                    <ArrowBackIosNewIcon fontSize="large" color="primary" />
+                  </IconButton>
+                </Box>
+
+                <Box position="absolute" top="30%" right={0} zIndex={1}>
+                  <IconButton className="next">
+                    <ArrowForwardIosIcon fontSize="large" color="primary" />
+                  </IconButton>
+                </Box>
+              </>
+            )}
           </Swiper>
-
-          <Box position="absolute" top="30%" left={0} zIndex={1}>
-            <IconButton className="prev">
-              <ArrowBackIosNewIcon fontSize="large" color="primary" />
-            </IconButton>
-          </Box>
-
-          <Box position="absolute" top="30%" right={0} zIndex={1}>
-            <IconButton className="next">
-              <ArrowForwardIosIcon fontSize="large" color="primary" />
-            </IconButton>
-          </Box>
         </Box>
       ) : (
         <Typography>No information about the cast</Typography>

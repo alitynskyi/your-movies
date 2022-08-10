@@ -6,8 +6,10 @@ import Tab from "@mui/material/Tab";
 import MovieDetailsTabCast from "../MovieDetailsTabCast";
 import MovieDetailsTabReviews from "../MovieDetailsTabReviews";
 
+import { MediaType } from "../../../types";
+
 interface MovieDetailsTabsProps {
-  type: "movie" | "tv";
+  type: MediaType;
   movieId: string;
 }
 

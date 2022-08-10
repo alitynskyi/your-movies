@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SearchBarCard from "../SearchBarCard";
 
-import { IMovie } from "../../../types";
+import { Movie, MediaType } from "../../../types";
 import useStyles from "./useStyles";
 
 interface SearchBarListProps {
-  movies?: IMovie[];
-  mediaType: "movie" | "tv";
+  movies?: Movie[];
+  mediaType: MediaType;
   onItemClick: () => void;
 }
 

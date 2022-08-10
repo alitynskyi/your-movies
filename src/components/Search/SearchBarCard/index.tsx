@@ -7,12 +7,12 @@ import StarIcon from "@mui/icons-material/Star";
 
 import formatedPosterImage from "../../../common/formatedPosterImage";
 import formatedReleaseDate from "../../../common/formatedReleaseDate";
-import { IMovie } from "../../../types";
+import { Movie, MediaType } from "../../../types";
 import useStyles from "./useStyles";
 
 interface SearchBarCardProps {
-  movie: IMovie;
-  mediaType: "movie" | "tv";
+  movie: Movie;
+  mediaType: MediaType;
   onClick: () => void;
 }
 

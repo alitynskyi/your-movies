@@ -12,10 +12,10 @@ import Chip from "@mui/material/Chip";
 import formatedPosterImage from "../../../common/formatedPosterImage";
 import formatedMediaType from "../../../common/formatedMediaType";
 import formatedReleaseDate from "../../../common/formatedReleaseDate";
-import { IMovie } from "../../../types";
+import { Movie } from "../../../types";
 
 interface MoviesListItemProps {
-  movie: IMovie;
+  movie: Movie;
 }
 
 const MoviesListItem: React.FC<MoviesListItemProps> = ({ movie }) => {

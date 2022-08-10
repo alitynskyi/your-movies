@@ -25,7 +25,7 @@ export type Review = {
   content: string;
 };
 
-export interface IMovie {
+export interface Movie {
   id: number;
   title: string;
   name: string;
@@ -49,22 +49,24 @@ export interface IMovie {
   genres: Genre[];
 }
 
-export interface IMoviesData {
+export interface MoviesData {
   page: number;
-  results: IMovie[];
+  results: Movie[];
   total_pages: number;
   total_results: number;
 }
 
-export interface IMovieCastData {
+export interface MovieCastData {
   id: number;
   cast: Actor[];
 }
 
-export interface IMovieReviewsData {
+export interface MovieReviewsData {
   id: number;
   page: number;
   results: Review[];
   total_pages: number;
   total_results: number;
 }
+
+export type MediaType = "movie" | "tv";

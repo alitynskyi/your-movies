@@ -11,10 +11,10 @@ import StarIcon from "@mui/icons-material/Star";
 import formatedPosterImage from "../../../common/formatedPosterImage";
 import formatedReleaseDate from "../../../common/formatedReleaseDate";
 import formatedSum from "../../../common/formatedSum";
-import { IMovie } from "../../../types";
+import { Movie } from "../../../types";
 
 type FilmDescriptionProps = {
-  film: IMovie;
+  film: Movie;
 };
 
 const FilmDescription: React.FC<FilmDescriptionProps> = ({ film }) => {

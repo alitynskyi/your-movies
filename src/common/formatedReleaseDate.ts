@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 
-import { IMovie } from "../types";
+import { Movie } from "../types";
 
-const formatedReleaseDate = (movie: IMovie) => {
+const formatedReleaseDate = (movie: Movie) => {
   const { release_date, first_air_date } = movie;
 
   if (release_date) return format(new Date(release_date), "Y");

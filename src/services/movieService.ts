@@ -1,19 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { API_KEY, BASE_URS } from "../common/constants";
-import {
-  IMovie,
-  IMoviesData,
-  IMovieCastData,
-  IMovieReviewsData,
-} from "../types";
+import { Movie, MoviesData, MovieCastData, MovieReviewsData } from "../types";
 
 export const movieAPI = createApi({
   reducerPath: "movieAPI",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URS }),
   endpoints: (build) => ({
     getTrends: build.query<
-      IMoviesData,
+      MoviesData,
       { type: "all" | "movie" | "tv"; page?: number }
     >({
       query: ({ type, page = 1 }) => ({
@@ -25,7 +20,7 @@ export const movieAPI = createApi({
       }),
     }),
     getMoviesByType: build.query<
-      IMoviesData,
+      MoviesData,
       { query: string; type: "movie" | "tv"; page?: number }
     >({
       query: ({ query, type, page = 1 }) => ({
@@ -38,7 +33,7 @@ export const movieAPI = createApi({
       }),
     }),
     getMovieCast: build.query<
-      IMovieCastData,
+      MovieCastData,
       { movieId: string; type: "movie" | "tv" }
     >({
       query: ({ movieId, type }) => ({
@@ -49,7 +44,7 @@ export const movieAPI = createApi({
       }),
     }),
     getMovieReviews: build.query<
-      IMovieReviewsData,
+      MovieReviewsData,
       { movieId: string; type: "movie" | "tv"; page?: number }
     >({
       query: ({ movieId, type, page = 1 }) => ({
@@ -60,7 +55,7 @@ export const movieAPI = createApi({
         },
       }),
     }),
-    getFilmById: build.query<IMovie, string>({
+    getFilmById: build.query<Movie, string>({
       query: (id) => ({
         url: `/movie/${id}`,
         params: {
@@ -68,7 +63,7 @@ export const movieAPI = createApi({
         },
       }),
     }),
-    getSeriesById: build.query<IMovie, string>({
+    getSeriesById: build.query<Movie, string>({
       query: (id) => ({
         url: `/tv/${id}`,
         params: {

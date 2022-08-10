@@ -5,10 +5,10 @@ import Box from "@mui/material/Box";
 import MoviesListItem from "../MovieListItem";
 import Pagination from "../Pagination";
 
-import { IMovie } from "../../../types";
+import { Movie } from "../../../types";
 
 interface MoviesListProps {
-  movies: IMovie[];
+  movies: Movie[];
   withPagination?: boolean;
   totalPages?: number;
   changePage?: (page: number) => void;
