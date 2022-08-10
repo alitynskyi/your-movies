@@ -1,6 +1,7 @@
 import React, { useState, MouseEvent, useRef } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useOnClickOutside } from "usehooks-ts";
+import { useIntl } from "react-intl";
 
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -16,12 +17,14 @@ import Logo from "../Logo";
 import SearchBar from "../../Search/SearchBar";
 
 import useStyles from "./useStyles";
+import messages from "./messages";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const searchBarRef = useRef(null);
   const classes = useStyles();
+  const intl = useIntl();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -64,7 +67,7 @@ const Header = () => {
                 to="/films"
                 onClick={handleCloseNavMenu}
               >
-                Films
+                {intl.formatMessage(messages.menuItemFilms)}
               </MenuItem>
 
               <MenuItem
@@ -72,7 +75,7 @@ const Header = () => {
                 to="/series"
                 onClick={handleCloseNavMenu}
               >
-                Series
+                {intl.formatMessage(messages.menuItemSeries)}
               </MenuItem>
             </Menu>
           </Box>
@@ -85,11 +88,15 @@ const Header = () => {
 
           <Box flexGrow={1} display={{ xs: "none", md: "flex" }}>
             <MenuItem component={RouterLink} to="/films" sx={{ mr: 4 }}>
-              <Typography variant="h6">Films</Typography>
+              <Typography variant="h6">
+                {intl.formatMessage(messages.menuItemFilms)}
+              </Typography>
             </MenuItem>
 
             <MenuItem component={RouterLink} to="/series">
-              <Typography variant="h6">Series</Typography>
+              <Typography variant="h6">
+                {intl.formatMessage(messages.menuItemSeries)}
+              </Typography>
             </MenuItem>
           </Box>
 

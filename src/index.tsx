@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import App from "./App";
 import GlobalStyles from "./components/Unknown/GlobalStyles";
+import IntlProvider from "./components/Unknown/IntlProvider";
 import { setupStore } from "./store";
 import theme from "./common/theme";
 
@@ -20,13 +21,15 @@ root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <StyledEngineProvider injectFirst>
-            <GlobalStyles />
-            <CssBaseline />
-            <App />
-          </StyledEngineProvider>
-        </ThemeProvider>
+        <IntlProvider>
+          <ThemeProvider theme={theme}>
+            <StyledEngineProvider injectFirst>
+              <CssBaseline />
+              <GlobalStyles />
+              <App />
+            </StyledEngineProvider>
+          </ThemeProvider>
+        </IntlProvider>
       </BrowserRouter>
     </ReduxProvider>
   </React.StrictMode>,

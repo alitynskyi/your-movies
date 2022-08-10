@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDebounce, useOnClickOutside } from "usehooks-ts";
 import { Link as RouterLink } from "react-router-dom";
+import { useIntl } from "react-intl";
 
 import Input from "@mui/material/Input";
 import FormControl from "@mui/material/FormControl";
@@ -17,6 +18,7 @@ import SearchBarList from "../SearchBarList";
 import { useLazyGetMoviesByTypeQuery } from "../../../services/movieService";
 import theme from "../../../common/theme";
 import useStyles from "./useStyles";
+import messages from "./messages";
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState("");
@@ -26,6 +28,7 @@ const SearchBar = () => {
 
   const inputRef = useRef(null);
   const classes = useStyles();
+  const intl = useIntl();
 
   const showSearchList = isFocused && query;
   const type = tabValue === 0 ? "movie" : "tv";
@@ -59,7 +62,7 @@ const SearchBar = () => {
     >
       <FormControl fullWidth ref={inputRef}>
         <Input
-          placeholder="Search..."
+          placeholder={intl.formatMessage(messages.placeholder)}
           value={inputValue}
           onChange={handleChangeInput}
           onFocus={() => setIsFocused(true)}
@@ -98,8 +101,8 @@ const SearchBar = () => {
                 textColor="secondary"
                 indicatorColor="secondary"
               >
-                <Tab label="Films" />
-                <Tab label="Series" />
+                <Tab label={intl.formatMessage(messages.filmsTabLabel)} />
+                <Tab label={intl.formatMessage(messages.seriesTabLabel)} />
               </Tabs>
             </Box>
 
@@ -119,7 +122,7 @@ const SearchBar = () => {
                     color="inherit"
                     onClick={() => setIsFocused(false)}
                   >
-                    Watch all
+                    {intl.formatMessage(messages.watchAllButton)}
                   </Button>
                 </Box>
               )}

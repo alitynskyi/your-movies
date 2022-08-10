@@ -1,11 +1,16 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { Link as RouterLink } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import messages from "./messages";
+
 const NotFoundPage: React.FC = () => {
+  const intl = useIntl();
+
   return (
     <Box
       display="flex"
@@ -14,13 +19,13 @@ const NotFoundPage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Typography variant="h2">Not found page</Typography>
+      <Typography variant="h2">{intl.formatMessage(messages.title)}</Typography>
 
-      <Typography>You may have mistyped the page address.</Typography>
+      <Typography>{intl.formatMessage(messages.subtitle)}</Typography>
 
       <Box mt={10}>
         <Button component={RouterLink} to="/" variant="contained">
-          Main page
+          {intl.formatMessage(messages.buttonText)}
         </Button>
       </Box>
     </Box>

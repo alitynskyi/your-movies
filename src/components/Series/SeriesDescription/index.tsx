@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import { useIntl } from "react-intl";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -10,12 +11,15 @@ import StarIcon from "@mui/icons-material/Star";
 
 import formatedPosterImage from "../../../common/formatedPosterImage";
 import { Movie } from "../../../types";
+import messages from "./messages";
 
 type SeriesDescriptionProps = {
   series: Movie;
 };
 
 const SeriesDescription: React.FC<SeriesDescriptionProps> = ({ series }) => {
+  const intl = useIntl();
+
   const {
     name,
     original_name,
@@ -33,18 +37,27 @@ const SeriesDescription: React.FC<SeriesDescriptionProps> = ({ series }) => {
 
   const detailsElements = [
     {
-      name: "World premiere",
+      name: intl.formatMessage(messages.worldPremiere),
       value: first_air_date ? format(new Date(first_air_date), "PPP") : null,
     },
     {
-      name: "Episode duration",
+      name: intl.formatMessage(messages.duration),
       value: episode_run_time ? `~${episode_run_time[0]} min` : null,
     },
-    { name: "Original title", value: original_name ?? null },
-    { name: "Seasons", value: number_of_seasons ?? null },
-    { name: "Episodes", value: number_of_episodes ?? null },
     {
-      name: "Last episode date",
+      name: intl.formatMessage(messages.originalTitle),
+      value: original_name ?? null,
+    },
+    {
+      name: intl.formatMessage(messages.seasons),
+      value: number_of_seasons ?? null,
+    },
+    {
+      name: intl.formatMessage(messages.episodes),
+      value: number_of_episodes ?? null,
+    },
+    {
+      name: intl.formatMessage(messages.lastEpisodeDate),
       value: last_air_date ? format(new Date(last_air_date), "PPP") : null,
     },
   ];

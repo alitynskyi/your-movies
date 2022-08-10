@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useIntl } from "react-intl";
 
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
@@ -7,6 +8,7 @@ import MovieDetailsTabCast from "../MovieDetailsTabCast";
 import MovieDetailsTabReviews from "../MovieDetailsTabReviews";
 
 import { MediaType } from "../../../types";
+import messages from "./messages";
 
 interface MovieDetailsTabsProps {
   type: MediaType;
@@ -18,6 +20,7 @@ const MovieDetailsTabs: React.FC<MovieDetailsTabsProps> = ({
   type,
 }) => {
   const [value, setValue] = useState(0);
+  const intl = useIntl();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -27,8 +30,8 @@ const MovieDetailsTabs: React.FC<MovieDetailsTabsProps> = ({
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Cast" />
-          <Tab label="Reviews" />
+          <Tab label={intl.formatMessage(messages.castTabLabel)} />
+          <Tab label={intl.formatMessage(messages.reviewsTabLabel)} />
         </Tabs>
       </Box>
 

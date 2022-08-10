@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,6 +8,7 @@ import Loader from "../Loader";
 
 import { useGetMovieReviewsQuery } from "../../../services/movieService";
 import { MediaType } from "../../../types";
+import messages from "./messages";
 
 interface MovieDetailsTabReviewsProps {
   type: MediaType;
@@ -17,6 +19,7 @@ const MovieDetailsTabReviews: React.FC<MovieDetailsTabReviewsProps> = ({
   movieId,
   type,
 }) => {
+  const intl = useIntl();
   const { data, isLoading } = useGetMovieReviewsQuery({
     movieId,
     type,
@@ -38,7 +41,7 @@ const MovieDetailsTabReviews: React.FC<MovieDetailsTabReviewsProps> = ({
           </Box>
         ))
       ) : (
-        <Typography>There are no reviews yet</Typography>
+        <Typography>{intl.formatMessage(messages.noResultsText)}</Typography>
       )}
     </Box>
   );

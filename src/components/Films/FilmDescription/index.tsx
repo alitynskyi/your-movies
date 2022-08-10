@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import { useIntl } from "react-intl";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -12,12 +13,15 @@ import formatedPosterImage from "../../../common/formatedPosterImage";
 import formatedReleaseDate from "../../../common/formatedReleaseDate";
 import formatedSum from "../../../common/formatedSum";
 import { Movie } from "../../../types";
+import messages from "./messages";
 
 type FilmDescriptionProps = {
   film: Movie;
 };
 
 const FilmDescription: React.FC<FilmDescriptionProps> = ({ film }) => {
+  const intl = useIntl();
+
   const releaseDate = formatedReleaseDate(film);
   const {
     title,
@@ -36,19 +40,25 @@ const FilmDescription: React.FC<FilmDescriptionProps> = ({ film }) => {
   const releaseYear = releaseDate && ` (${releaseDate})`;
 
   const detailsElements = [
-    { name: "Duration", value: runtime ? runtime.toString() + " min" : null },
-    { name: "Original title", value: original_title ?? null },
+    {
+      name: intl.formatMessage(messages.duration),
+      value: runtime ? runtime.toString() + " min" : null,
+    },
+    {
+      name: intl.formatMessage(messages.originalTitle),
+      value: original_title ?? null,
+    },
 
     {
-      name: "World premiere",
+      name: intl.formatMessage(messages.worldPremiere),
       value: release_date ? format(new Date(release_date), "PPP") : null,
     },
     {
-      name: "Budget",
+      name: intl.formatMessage(messages.budget),
       value: budget ? formatedSum(budget) + "$" : null,
     },
     {
-      name: "Box office",
+      name: intl.formatMessage(messages.boxOffice),
       value: revenue ? formatedSum(revenue) + "$" : null,
     },
   ];

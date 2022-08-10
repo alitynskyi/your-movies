@@ -1,10 +1,12 @@
 import React from "react";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useIntl } from "react-intl";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import PersonCard from "../PersonCard";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -13,6 +15,7 @@ import Loader from "../Loader";
 
 import { useGetMovieCastQuery } from "../../../services/movieService";
 import { MediaType } from "../../../types";
+import messages from "./messages";
 
 interface MovieDetailsTabCastProps {
   type: MediaType;
@@ -23,7 +26,9 @@ const MovieDetailsTabCast: React.FC<MovieDetailsTabCastProps> = ({
   movieId,
   type,
 }) => {
+  const intl = useIntl();
   const theme = useTheme();
+
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -77,7 +82,7 @@ const MovieDetailsTabCast: React.FC<MovieDetailsTabCastProps> = ({
           </Swiper>
         </Box>
       ) : (
-        <Typography>No information about the cast</Typography>
+        <Typography>{intl.formatMessage(messages.noResultsText)}</Typography>
       )}
     </Box>
   );

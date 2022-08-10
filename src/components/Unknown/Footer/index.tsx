@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { Link as RouterLink } from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -9,9 +10,11 @@ import Link from "@mui/material/Link";
 import Logo from "../Logo";
 
 import useStyles from "./useStyles";
+import messages from "./messages";
 
 const Footer = () => {
   const classes = useStyles();
+  const intl = useIntl();
 
   return (
     <Box component="footer" bgcolor="primary.main">
@@ -31,13 +34,13 @@ const Footer = () => {
           <Box display={{ xs: "none", md: "flex" }}>
             <MenuItem component={RouterLink} to="/films" sx={{ mr: 4 }}>
               <Typography variant="h6" color="common.white">
-                Films
+                {intl.formatMessage(messages.menuItemFilms)}
               </Typography>
             </MenuItem>
 
             <MenuItem component={RouterLink} to="/series" sx={{ mr: 4 }}>
               <Typography variant="h6" color="common.white">
-                Series
+                {intl.formatMessage(messages.menuItemSeries)}
               </Typography>
             </MenuItem>
           </Box>
@@ -50,7 +53,7 @@ const Footer = () => {
               variant="body2"
               color="common.white"
             >
-              Database API
+              {intl.formatMessage(messages.databaseLink)}
             </Typography>
             <Typography
               variant="body2"
@@ -60,7 +63,7 @@ const Footer = () => {
               pl={2}
               ml={2}
             >
-              © 2022 YourMovies
+              &copy; {intl.formatMessage(messages.copyright)}
             </Typography>
           </Box>
         </Box>
