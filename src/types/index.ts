@@ -25,7 +25,7 @@ export type Review = {
   content: string;
 };
 
-export interface Movie {
+export type Movie = {
   id: number;
   title: string;
   name: string;
@@ -47,26 +47,26 @@ export interface Movie {
   episode_run_time: number[];
   homepage: string;
   genres: Genre[];
-}
+};
 
-export interface MoviesData {
+export type MoviesData = {
   page: number;
   results: Movie[];
   total_pages: number;
   total_results: number;
-}
+};
 
-export interface MovieCastData {
+export type MovieCastData = {
   id: number;
   cast: Actor[];
-}
+};
 
-export interface MovieReviewsData {
+export type MovieReviewsData = {
   id: number;
   page: number;
   results: Review[];
   total_pages: number;
   total_results: number;
-}
+};
 
 export type MediaType = "movie" | "tv";
