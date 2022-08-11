@@ -5,6 +5,7 @@ const formatTranslationMessages = (
   messages: { [key: string]: string },
 ): { [key: string]: string } => {
   const defaultLocale = "en";
+
   const messageKeys = Object.keys(messages);
 
   const defaultFormattedMessages =
